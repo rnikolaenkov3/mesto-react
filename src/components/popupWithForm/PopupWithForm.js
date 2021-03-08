@@ -1,4 +1,4 @@
-function PopupWitForm(props) {
+function PopupWithForm(props) {
   let className = `popup popup_${props.name}`;
   if (props.isOpen) {
     className += ' popup_opened'
@@ -18,4 +18,4 @@ function PopupWitForm(props) {
   );
 }
 
-export default PopupWitForm;
+export default PopupWithForm;
