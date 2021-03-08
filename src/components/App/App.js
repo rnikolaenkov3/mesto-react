@@ -5,7 +5,7 @@ import Main from "../main/Main";
 import Footer from "../Footer/Footer";
 
 import ImagePopup from "../ImagePopup/ImagePopup";
-import PopupWitForm from "../popupWithForm/PopupWithForm";
+import PopupWithForm from "../popupWithForm/PopupWithForm";
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
@@ -57,7 +57,7 @@ function App() {
     <Footer/>
     {/* footer end */}
 
-    <PopupWitForm
+    <PopupWithForm
       name='edit-profile'
       title='Редактировать профиль'
       isOpen={isEditProfilePopupOpen}
@@ -73,9 +73,9 @@ function App() {
         <span className="popup__error profile-role-error">Вы пропустили это поле</span>
         <button type="submit" className="popup__btn-save root__link">Сохранить</button>
       </form>
-    </PopupWitForm>
+    </PopupWithForm>
 
-    <PopupWitForm
+    <PopupWithForm
       name='add-card'
       title='Новое место'
       isOpen={isAddPlacePopupOpen}
@@ -90,9 +90,9 @@ function App() {
         <span className="popup__error new-card-link-error">Вы пропустили это поле</span>
         <button type="submit" className="popup__btn-save root__link">Сохранить</button>
       </form>
-    </PopupWitForm>
+    </PopupWithForm>
 
-    <PopupWitForm
+    <PopupWithForm
       name='upload-avatar'
       title='Обновить аватар'
       isOpen={isEditAvatarPopupOpen}
@@ -104,9 +104,9 @@ function App() {
         <span className="popup__error avatar-upload-link-error">Вы пропустили это поле</span>
         <button type="submit" className="popup__btn-save root__link">Сохранить</button>
       </form>
-    </PopupWitForm>
+    </PopupWithForm>
 
-    <PopupWitForm
+    <PopupWithForm
       name='delete-card'
       title='Вы уверены?'
       isOpen={isDeletePlacePopupOpen}
@@ -116,7 +116,7 @@ function App() {
         <input type="hidden" className="popup__input popup__input_card-id" value="" name="card-id"/>
         <button type="submit" className="popup__btn-save root__link">Да</button>
       </form>
-    </PopupWitForm>
+    </PopupWithForm>
 
     <ImagePopup
       name='theme_photo'
