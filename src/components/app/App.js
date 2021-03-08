@@ -60,6 +60,7 @@ function App() {
       title='Редактировать профиль'
       isOpen={isEditProfilePopupOpen}
       onClose={closeAllPopups}
+      buttonText='Сохранить'
     >
       <input type="text" className="popup__input popup__input_func_name" aria-label="имя" value=""
              name="name"
@@ -75,6 +76,7 @@ function App() {
       title='Новое место'
       isOpen={isAddPlacePopupOpen}
       onClose={closeAllPopups}
+      buttonText='Сохранить'
     >
       <input type="text" className="popup__input popup__input_name" aria-label="имя" value="" name="name"
              placeholder="Название" id="new-card-name" required minLength="2" maxLength="30"/>
@@ -89,6 +91,7 @@ function App() {
       title='Обновить аватар'
       isOpen={isEditAvatarPopupOpen}
       onClose={closeAllPopups}
+      buttonText='Сохранить'
     >
       <input type="url" className="popup__input popup__input_link" aria-label="ссылка" value="" name="link"
              placeholder="Ссылка на картинку" id="avatar-upload-link" required/>
@@ -100,6 +103,7 @@ function App() {
       title='Вы уверены?'
       isOpen={isDeletePlacePopupOpen}
       onClose={closeAllPopups}
+      buttonText='Сохранить'
     >
       <input type="hidden" className="popup__input popup__input_card-id" value="" name="card-id"/>
     </PopupWithForm>
