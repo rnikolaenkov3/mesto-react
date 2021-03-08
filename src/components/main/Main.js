@@ -1,6 +1,6 @@
 import React from "react";
-import Api from "../utils/Api";
-import Card from "./Card";
+import Api from "../../utils/api";
+import Card from "../Card/Card";
 
 function Main(props) {
 
