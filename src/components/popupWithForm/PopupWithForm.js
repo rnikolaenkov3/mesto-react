@@ -11,7 +11,10 @@ function PopupWithForm(props) {
                 onClick={props.onClose}></button>
         <div className="popup__content">
           <h2 className="popup__title">{props.title}</h2>
-          {props.children}
+          <form action="#" className="popup__form" name="edit-profile" noValidate>
+            {props.children}
+            <button type="submit" className="popup__btn-save root__link">Сохранить</button>
+          </form>
         </div>
       </div>
     </div>
