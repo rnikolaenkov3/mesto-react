@@ -2,27 +2,19 @@ import React from "react";
 import Api from "../../utils/api";
 import Card from "../card/Card";
 import {CurrentUserContext} from "../../context/CurrentUserContext";
+import {CardContext} from "../../context/CardContext";
 
 function Main(props) {
-  const [cards, setCards] = React.useState([]);
-
   const currentUser = React.useContext(CurrentUserContext);
+  const cards = React.useContext(CardContext);
 
-  console.log(currentUser);
+  // console.log(cards);
+
+  // console.log(currentUser);
 
   const handleCardClick = (card) => {
     props.onCardClick(card);
   }
-
-  React.useEffect(() => {
-    Api.getCardList()
-      .then((data) => {
-        setCards(data);
-      })
-      .catch((res) => {
-        console.log(res);
-      });
-  }, []);
 
   return (
     <main>
