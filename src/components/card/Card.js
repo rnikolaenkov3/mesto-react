@@ -3,8 +3,13 @@ import {CurrentUserContext} from "../../context/CurrentUserContext";
 
 function Card(props) {
   const currentUser = React.useContext(CurrentUserContext);
+
   const handleClick = () => {
     props.onClick(props.card);
+  }
+
+  const handleLikeClick = () => {
+    props.onCardLike(props.card);
   }
 
   // Определяем, являемся ли мы владельцем текущей карточки
@@ -22,7 +27,7 @@ function Card(props) {
       <div className="places__title-wrap">
         <h2 className="places__title">{props.card.name}</h2>
         <div className="places__like-wrap">
-          <button type="button" className={cardLikeButtonClassName}></button>
+          <button type="button" className={cardLikeButtonClassName} onClick={handleLikeClick}></button>
           <p className="places__like-count">{props.card.likes.length}</p>
         </div>
       </div>

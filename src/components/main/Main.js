@@ -1,19 +1,33 @@
 import React from "react";
-import Api from "../../utils/api";
+import api from "../../utils/api";
 import Card from "../card/Card";
 import {CurrentUserContext} from "../../context/CurrentUserContext";
-import {CardContext} from "../../context/CardContext";
 
 function Main(props) {
   const currentUser = React.useContext(CurrentUserContext);
-  const cards = React.useContext(CardContext);
 
-  // console.log(cards);
+  const [cards, setCards] = React.useState([]);
 
-  // console.log(currentUser);
+  React.useEffect(() => {
+    setCards(props.cards)
+  },[props.cards]);
 
   const handleCardClick = (card) => {
     props.onCardClick(card);
+  }
+
+  const handleCardLike = (card) => {
+    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    // Отправляем запрос в API и получаем обновлённые данные карточки
+    if (isLiked) {
+      api.deleteLike(card._id).then((newCard) => {
+          setCards((cards) => cards.map((c) => c._id === card._id ? newCard : c));
+        });
+    } else {
+      api.addLike(card._id).then((newCard) => {
+        setCards((cards) => cards.map((c) => c._id === card._id ? newCard : c));
+      });
+    }
   }
 
   return (
@@ -49,7 +63,7 @@ function Main(props) {
       <section className="cards root__section root__cards">
         <ul className="places">
           {
-            cards.map((card) => <Card card={card} key={card._id} onClick={handleCardClick}/>)
+            cards.map((card) => <Card card={card} key={card._id} onClick={handleCardClick} onCardLike={handleCardLike}/>)
           }
         </ul>
       </section>

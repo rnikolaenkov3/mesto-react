@@ -65,7 +65,7 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <CardContext.Provider value={cards}>
+      {/*<CardContext.Provider value={cards}>*/}
         <div className="root">
           {/* header */}
           <Header/>
@@ -75,6 +75,7 @@ function App() {
             onAddPlace={handleAddPlaceClick}
             onEditProfile={handleEditProfileClick}
             onCardClick={handleCardClick}
+            cards = {cards}
           />
 
           {/* footer */}
@@ -142,7 +143,7 @@ function App() {
           />
           {/* end modal */}
         </div>
-      </CardContext.Provider>
+      {/*</CardContext.Provider>*/}
     </CurrentUserContext.Provider>
   );
 }
