@@ -12,6 +12,10 @@ function Card(props) {
     props.onCardLike(props.card);
   }
 
+  const handleDeleteCard = () => {
+    props.onCardDelete(props.card);
+  }
+
   // Определяем, являемся ли мы владельцем текущей карточки
   const isOwn = props.card.owner._id === currentUser._id;
   const cardDeleteBtnClassName = (`places__remove root__link ${isOwn && 'places__remove_visible'}`);
@@ -22,7 +26,7 @@ function Card(props) {
 
   return (
     <li className="places__card">
-      <button type="button" className={cardDeleteBtnClassName}></button>
+      <button type="button" className={cardDeleteBtnClassName} onClick={handleDeleteCard}></button>
       <img src={props.card.link} alt={props.card.name} className="places__img" onClick={handleClick}/>
       <div className="places__title-wrap">
         <h2 className="places__title">{props.card.name}</h2>

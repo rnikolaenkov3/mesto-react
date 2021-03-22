@@ -6,8 +6,11 @@ import {CurrentUserContext} from "../../context/CurrentUserContext";
 function Main(props) {
   const currentUser = React.useContext(CurrentUserContext);
 
-  const [cards, setCards] = React.useState([]);
+  // console.log('Pops: ', props.cards);
+  // const [cards, setCards] = React.useState(props.cards);
+  // console.log('State: ', cards);
 
+  const [cards, setCards] = React.useState([]);
   React.useEffect(() => {
     setCards(props.cards)
   },[props.cards]);
@@ -28,6 +31,17 @@ function Main(props) {
         setCards((cards) => cards.map((c) => c._id === card._id ? newCard : c));
       });
     }
+  }
+
+  const handleDeleteCard = (card) => {
+    api.deleteCard(card._id).then(() => {
+      const newCards = cards.filter((c) => {
+        if (c._id !== card._id) {
+          return c;
+        }
+      });
+      setCards(newCards);
+    });
   }
 
   return (
@@ -63,7 +77,14 @@ function Main(props) {
       <section className="cards root__section root__cards">
         <ul className="places">
           {
-            cards.map((card) => <Card card={card} key={card._id} onClick={handleCardClick} onCardLike={handleCardLike}/>)
+            cards.map((card) =>
+              <Card
+                card={card}
+                key={card._id}
+                onClick={handleCardClick}
+                onCardLike={handleCardLike}
+                onCardDelete={handleDeleteCard}
+              />)
           }
         </ul>
       </section>
