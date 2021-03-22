@@ -3,13 +3,14 @@ import '../../App.css';
 import Header from '../header/Header';
 import Main from "../main/Main";
 import Footer from "../footer/Footer";
+import EditProfilePopup from "../editProfilePopup/EditProfilePopup";
 
 import ImagePopup from "../imagePopup/ImagePopup";
 import PopupWithForm from "../popupWithForm/PopupWithForm";
 import Api from "../../utils/api";
 
 import {CurrentUserContext} from '../../context/CurrentUserContext';
-import {CardContext} from "../../context/CardContext";
+import api from "../../utils/api";
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
@@ -43,12 +44,22 @@ function App() {
     setIsEditAvatarPopupOpen(true);
   }
 
-  const handleEditProfileClick = () => {
-    setIsEditProfilePopupOpen(true);
+  const handleEditProfileClick = (isVisible) => {
+    console.log('App: ', isVisible);
+    setIsEditProfilePopupOpen(isVisible);
+    console.log('Popup: ', isEditProfilePopupOpen);
   }
 
   const handleAddPlaceClick = () => {
     setIsAddPlacePopupOpen(true);
+  }
+
+  const handleEditProfileSubmit = (e, name, description) => {
+    e.preventDefault();
+    console.log(name, description);
+    api.editProfile(name, description).then((data) => {
+      setCurrentUser(data);
+    })
   }
 
   const closeAllPopups = () => {
@@ -65,7 +76,6 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      {/*<CardContext.Provider value={cards}>*/}
         <div className="root">
           {/* header */}
           <Header/>
@@ -82,21 +92,11 @@ function App() {
           <Footer/>
           {/* footer end */}
 
-          <PopupWithForm
-            name='edit-profile'
-            title='Редактировать профиль'
-            isOpen={isEditProfilePopupOpen}
-            onClose={closeAllPopups}
-            buttonText='Сохранить'
-          >
-            <input type="text" className="popup__input popup__input_func_name" aria-label="имя" value=""
-                   name="name"
-                   id="profile-name" required minLength="2" maxLength="40" placeholder="Имя"/>
-            <span className="popup__error profile-name-error">Вы пропустили это поле</span>
-            <input type="text" className="popup__input popup__input_func_role" aria-label="роль" value=""
-                   name="about" id="profile-role" required minLength="2" maxLength="200" placeholder="Роль"/>
-            <span className="popup__error profile-role-error">Вы пропустили это поле</span>
-          </PopupWithForm>
+          <EditProfilePopup
+            isOpen = {isEditProfilePopupOpen}
+            onClose = {closeAllPopups}
+            onSubmit = {handleEditProfileSubmit}
+          />
 
           <PopupWithForm
             name='add-card'
@@ -143,7 +143,6 @@ function App() {
           />
           {/* end modal */}
         </div>
-      {/*</CardContext.Provider>*/}
     </CurrentUserContext.Provider>
   );
 }

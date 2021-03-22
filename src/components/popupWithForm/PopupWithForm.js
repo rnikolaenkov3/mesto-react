@@ -4,6 +4,10 @@ function PopupWithForm(props) {
     className += ' popup_opened'
   }
 
+  const onSubmit = (e) => {
+    props.onEditProfileSubmit(e);
+  }
+
   return (
     <div className={className}>
       <div className="popup__container popup__container_theme_form">
@@ -11,7 +15,7 @@ function PopupWithForm(props) {
                 onClick={props.onClose}></button>
         <div className="popup__content">
           <h2 className="popup__title">{props.title}</h2>
-          <form action="#" className="popup__form" name={props.name} noValidate>
+          <form action="#" className="popup__form" name={props.name} noValidate onSubmit={onSubmit}>
             {props.children}
             <button type="submit" className="popup__btn-save root__link">{props.buttonText}</button>
           </form>

@@ -44,6 +44,11 @@ function Main(props) {
     });
   }
 
+  const handleEditProfile = () => {
+    console.log('Click: ', 'YEees');
+    props.onEditProfile(true);
+  }
+
   return (
     <main>
       {/* profile */}
@@ -60,7 +65,7 @@ function Main(props) {
               type="button"
               className="profile__btn-change root__link"
               aria-label="редактирование профиля"
-              onClick={props.onEditProfile}
+              onClick={handleEditProfile}
             >
             </button>
           </div>
