@@ -1,15 +1,11 @@
 import React from 'react';
 import PopupWithForm from "../popupWithForm/PopupWithForm";
 import {CurrentUserContext} from "../../context/CurrentUserContext";
-import Main from "../main/Main";
-import api from "../../utils/api";
 
 
 function EditProfilePopup(props) {
   const [name, setName] = React.useState('');
   const [description, setDescription] = React.useState('');
-
-  // console.log('Test: ', props);
 
   const currentUser = React.useContext(CurrentUserContext);
 
@@ -19,12 +15,11 @@ function EditProfilePopup(props) {
   }, [currentUser]);
 
   const handleChangeName = (e) => {
-    console.log(e.target.value);
     setName(e.target.value);
   }
 
-  const onEditProfileSubmit = (e) => {
-    props.onSubmit(e, name, description);
+  const handleSubmit = () => {
+    props.onUpdateUser(name, description);
   }
 
   const handleChangeDescription = (e) => {
@@ -38,7 +33,7 @@ function EditProfilePopup(props) {
       isOpen={props.isOpen}
       onClose={props.onClose}
       buttonText='Сохранить'
-      onSubmit={onEditProfileSubmit}
+      onSubmit={handleSubmit}
     >
       <input
         type="text"

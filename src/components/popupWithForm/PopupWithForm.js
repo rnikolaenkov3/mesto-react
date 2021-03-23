@@ -5,7 +5,8 @@ function PopupWithForm(props) {
   }
 
   const onSubmit = (e) => {
-    props.onEditProfileSubmit(e);
+    e.preventDefault();
+    props.onSubmit();
   }
 
   return (

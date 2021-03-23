@@ -54,12 +54,14 @@ function App() {
     setIsAddPlacePopupOpen(true);
   }
 
-  const handleEditProfileSubmit = (e, name, description) => {
-    e.preventDefault();
-    console.log(name, description);
+  const handleUpdateUser = (name, description) => {
+    // console.log(name, description);
     api.editProfile(name, description).then((data) => {
       setCurrentUser(data);
-    })
+      closeAllPopups();
+    }).catch((res) => {
+      console.log(res);
+    });
   }
 
   const closeAllPopups = () => {
@@ -95,7 +97,7 @@ function App() {
           <EditProfilePopup
             isOpen = {isEditProfilePopupOpen}
             onClose = {closeAllPopups}
-            onSubmit = {handleEditProfileSubmit}
+            onUpdateUser = {handleUpdateUser}
           />
 
           <PopupWithForm
