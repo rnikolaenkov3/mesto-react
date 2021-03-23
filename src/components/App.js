@@ -89,10 +89,14 @@ function App() {
     if (isLiked) {
       api.deleteLike(card._id).then((newCard) => {
         setCards((cards) => cards.map((c) => c._id === card._id ? newCard : c));
+      }).catch((res) => {
+        console.log(res);
       });
     } else {
       api.addLike(card._id).then((newCard) => {
         setCards((cards) => cards.map((c) => c._id === card._id ? newCard : c));
+      }).catch((res) => {
+        console.log(res);
       });
     }
   }
