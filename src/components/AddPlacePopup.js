@@ -15,6 +15,8 @@ function AddPlacePopup(props) {
 
   const onSubmit = () => {
     props.onAddCard(name, url);
+    setUrl('');
+    setName('');
   }
 
   return(
