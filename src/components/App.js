@@ -107,6 +107,8 @@ function App() {
         if (c._id !== card._id) {
           return c;
         }
+      }).catch((res) => {
+        console.log(res);
       });
       setCards(newCards);
     });
@@ -118,7 +120,7 @@ function App() {
       closeAllPopups();
     }).catch((res) => {
       console.log(res);
-    })
+    });
   }
 
   return (
