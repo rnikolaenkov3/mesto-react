@@ -54,7 +54,7 @@ function Main(props) {
       <section className="cards root__section root__cards">
         <ul className="places">
           {
-            props.cards.map((card) =>
+            props.cards.map((card) => (
               <Card
                 card={card}
                 key={card._id}
@@ -62,6 +62,7 @@ function Main(props) {
                 onCardLike={onCardLike}
                 onCardDelete={onCardDelete}
               />)
+            )
           }
         </ul>
       </section>
