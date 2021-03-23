@@ -1,3 +1,5 @@
+import { apiConfig } from './utils';
+
 class Api {
   constructor(config) {
     this._url = config.url;
@@ -97,12 +99,6 @@ class Api {
 
 }
 
-const api = new Api({
-  url: 'https://mesto.nomoreparties.co/v1/cohort-20',
-  headers: {
-    'content-type': 'application/json',
-    'Authorization': '87a20906-15d2-4ba8-8690-ee52e9ae8d47'
-  }
-});
+const api = new Api(apiConfig);
 
 export default api;
