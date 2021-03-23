@@ -107,10 +107,10 @@ function App() {
         if (c._id !== card._id) {
           return c;
         }
-      }).catch((res) => {
-        console.log(res);
-      });
+      })
       setCards(newCards);
+    }).catch((res) => {
+      console.log(res);
     });
   }
 
