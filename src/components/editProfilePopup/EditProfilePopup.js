@@ -4,26 +4,26 @@ import {CurrentUserContext} from "../../context/CurrentUserContext";
 
 
 function EditProfilePopup(props) {
+  const currentUser = React.useContext(CurrentUserContext);
+
   const [name, setName] = React.useState('');
   const [description, setDescription] = React.useState('');
-
-  const currentUser = React.useContext(CurrentUserContext);
 
   React.useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about);
   }, [currentUser]);
 
-  const handleChangeName = (e) => {
+  const onChangeName = (e) => {
     setName(e.target.value);
+  }
+
+  const onChangeDescription = (e) => {
+    setDescription(e.target.value);
   }
 
   const handleSubmit = () => {
     props.onUpdateUser(name, description);
-  }
-
-  const handleChangeDescription = (e) => {
-    setDescription(e.target.value);
   }
 
   return (
@@ -40,13 +40,12 @@ function EditProfilePopup(props) {
         className="popup__input popup__input_func_name"
         aria-label="имя"
         value={name}
-        onChange={handleChangeName}
+        onChange={onChangeName}
         name="name"
         id="profile-name"
         required minLength="2"
         maxLength="40"
         placeholder="Имя"
-        // onChange={handleChangeName}
       />
       <span className="popup__error profile-name-error">Вы пропустили это поле</span>
       <input
@@ -54,13 +53,13 @@ function EditProfilePopup(props) {
         className="popup__input popup__input_func_role"
         aria-label="роль"
         value={description}
+        onChange={onChangeDescription}
         name="description"
-        // defaultValue={description}
         id="profile-role"
-        required minLength="2"
+        required
+        minLength="2"
         maxLength="200"
         placeholder="Роль"
-        onChange={handleChangeDescription}
       />
       <span className="popup__error profile-role-error">Вы пропустили это поле</span>
     </PopupWithForm>

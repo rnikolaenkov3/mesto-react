@@ -1,51 +1,23 @@
 import React from "react";
-import api from "../../utils/api";
 import Card from "../card/Card";
 import {CurrentUserContext} from "../../context/CurrentUserContext";
 
 function Main(props) {
   const currentUser = React.useContext(CurrentUserContext);
 
-  // console.log('Pops: ', props.cards);
-  // const [cards, setCards] = React.useState(props.cards);
-  // console.log('State: ', cards);
-
-  const [cards, setCards] = React.useState([]);
-  React.useEffect(() => {
-    setCards(props.cards)
-  },[props.cards]);
-
   const handleCardClick = (card) => {
     props.onCardClick(card);
   }
 
-  const handleCardLike = (card) => {
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
-    // Отправляем запрос в API и получаем обновлённые данные карточки
-    if (isLiked) {
-      api.deleteLike(card._id).then((newCard) => {
-          setCards((cards) => cards.map((c) => c._id === card._id ? newCard : c));
-        });
-    } else {
-      api.addLike(card._id).then((newCard) => {
-        setCards((cards) => cards.map((c) => c._id === card._id ? newCard : c));
-      });
-    }
+  const onCardLike = (card) => {
+    props.onCardLike(card);
   }
 
-  const handleDeleteCard = (card) => {
-    api.deleteCard(card._id).then(() => {
-      const newCards = cards.filter((c) => {
-        if (c._id !== card._id) {
-          return c;
-        }
-      });
-      setCards(newCards);
-    });
+  const onCardDelete = (card) => {
+    props.onCardDelete(card);
   }
 
   const handleEditProfile = () => {
-    console.log('Click: ', 'YEees');
     props.onEditProfile(true);
   }
 
@@ -82,13 +54,13 @@ function Main(props) {
       <section className="cards root__section root__cards">
         <ul className="places">
           {
-            cards.map((card) =>
+            props.cards.map((card) =>
               <Card
                 card={card}
                 key={card._id}
                 onClick={handleCardClick}
-                onCardLike={handleCardLike}
-                onCardDelete={handleDeleteCard}
+                onCardLike={onCardLike}
+                onCardDelete={onCardDelete}
               />)
           }
         </ul>
